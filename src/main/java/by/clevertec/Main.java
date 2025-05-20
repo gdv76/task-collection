@@ -68,7 +68,6 @@ public class Main {
 
     }
 
-//Подсчитать количество всех животных пола = Female. Вывести в консоль
     public static void task4() {
         System.out.println("Задачка 4");
 
@@ -79,8 +78,20 @@ public class Main {
     }
 
     public static void task5() {
+        System.out.println("Задачка 5");
+
         List<Animal> animals = Util.getAnimals();
-//        animals.stream() Продолжить ...
+
+        System.out.println(animals.stream()
+                .filter(animal -> animal.getAge() >= 20 && animal.getAge() <= 30 && animal.getOrigin().equals("Hungarian"))
+                .count());
+
+// Второй вариант
+        animals.stream()
+                .filter(animal -> animal.getAge() >= 20 && animal.getAge() <= 30 && animal.getOrigin().equals("Hungarian"))
+                .map(animal -> "Есть")
+                .distinct()
+                .forEach(System.out::println);
     }
 
     public static void task6() {
