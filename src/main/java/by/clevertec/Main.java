@@ -58,7 +58,6 @@ public class Main {
                .forEach(System.out::println);
     }
 
-//Отобрать всех животных старше 30 лет и вывести все страны происхождения без дубликатов начинающиеся на "A"
     public static void task3() {
         System.out.println("Задачка 3");
         List<Animal> animals = Util.getAnimals();
@@ -69,9 +68,14 @@ public class Main {
 
     }
 
+//Подсчитать количество всех животных пола = Female. Вывести в консоль
     public static void task4() {
+        System.out.println("Задачка 4");
+
         List<Animal> animals = Util.getAnimals();
-//        animals.stream() Продолжить ...
+        System.out.println(animals.stream()
+                        .filter(animal -> animal.getGender().equals("Female"))
+                        .count());
     }
 
     public static void task5() {
