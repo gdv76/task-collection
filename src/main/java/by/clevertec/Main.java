@@ -1,15 +1,13 @@
 package by.clevertec;
 
-import by.clevertec.model.Animal;
-import by.clevertec.model.Car;
-import by.clevertec.model.Examination;
-import by.clevertec.model.Flower;
-import by.clevertec.model.House;
-import by.clevertec.model.Person;
-import by.clevertec.model.Student;
+import by.clevertec.model.*;
 import by.clevertec.util.Util;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static by.clevertec.model.AnimalZoo.*;
 
 public class Main {
 
@@ -37,11 +35,17 @@ public class Main {
         task20();
         task21();
         task22();
-    }
+    };
+
 
     public static void task1() {
         List<Animal> animals = Util.getAnimals();
-//        animals.stream() Продолжить ...
+        System.out.println(
+        animals.stream().filter(animal -> animal.getAge()>=10&&animal.getAge()<=20)
+                .sorted(Comparator.comparingInt(Animal::getAge))
+                .map(animal -> new AnimalZoo(animal, AnimalZoo.getIndexAnimal()/7))
+                .collect(Collectors.groupingBy(AnimalZoo::getIndexZoo))
+                .get(2));
     }
 
     public static void task2() {
