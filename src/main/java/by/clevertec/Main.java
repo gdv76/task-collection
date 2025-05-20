@@ -41,12 +41,20 @@ public class Main {
     public static void task1() {
         System.out.println("Задачка 1");
         List<Animal> animals = Util.getAnimals();
-        System.out.println(
+//        System.out.println(
+//        animals.stream().filter(animal -> animal.getAge()>=10&&animal.getAge()<=20)
+//                .sorted(Comparator.comparingInt(Animal::getAge))
+//                .map(animal -> new AnimalZoo(animal, AnimalZoo.getIndexAnimal()/7))
+//                .collect(Collectors.groupingBy(AnimalZoo::getIndexZoo))
+//                .get(2)
+//        );
+
         animals.stream().filter(animal -> animal.getAge()>=10&&animal.getAge()<=20)
                 .sorted(Comparator.comparingInt(Animal::getAge))
                 .map(animal -> new AnimalZoo(animal, AnimalZoo.getIndexAnimal()/7))
                 .collect(Collectors.groupingBy(AnimalZoo::getIndexZoo))
-                .get(2));
+                .get(2)
+                .forEach(System.out::println);
     }
 
     public static void task2() {
