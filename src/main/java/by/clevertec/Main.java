@@ -94,9 +94,21 @@ public class Main {
                 .forEach(System.out::println);
     }
 
+//Взять всех животных. Все ли они пола Male и Female ?
+//Ответ вывести в консоль
     public static void task6() {
+        System.out.println("Задачка 6");
+
         List<Animal> animals = Util.getAnimals();
-//        animals.stream() Продолжить ...
+
+        animals.stream()
+                .filter(animal -> !animal.getGender().equals("Male" ) && !animal.getGender().equals("Female" ))
+                .map(animal -> "Нет")
+                .distinct()
+                .forEach(System.out::println);
+
+        System.out.println(animals.stream()
+                .allMatch(animal -> animal.getGender().equals("Male") || animal.getGender().equals("Female")));
     }
 
     public static void task7() {
