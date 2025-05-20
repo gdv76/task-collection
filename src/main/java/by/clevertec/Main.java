@@ -39,6 +39,7 @@ public class Main {
 
 
     public static void task1() {
+        System.out.println("Задачка 1");
         List<Animal> animals = Util.getAnimals();
         System.out.println(
         animals.stream().filter(animal -> animal.getAge()>=10&&animal.getAge()<=20)
@@ -49,6 +50,7 @@ public class Main {
     }
 
     public static void task2() {
+        System.out.println("Задачка 2");
         List<Animal> animals = Util.getAnimals();
 
         animals.stream().filter(animal -> animal.getOrigin().equals("Japanese"))
@@ -56,9 +58,15 @@ public class Main {
                .forEach(System.out::println);
     }
 
+//Отобрать всех животных старше 30 лет и вывести все страны происхождения без дубликатов начинающиеся на "A"
     public static void task3() {
+        System.out.println("Задачка 3");
         List<Animal> animals = Util.getAnimals();
-//        animals.stream() Продолжить ...
+
+        animals.stream().filter(animal -> animal.getAge()>30 && animal.getOrigin().charAt(0) == 'A')
+                .map(animal -> animal.getOrigin())
+                .distinct().forEach(System.out::println);
+
     }
 
     public static void task4() {
