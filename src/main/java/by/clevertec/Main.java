@@ -119,14 +119,34 @@ public class Main {
                 .allMatch(animal -> animal.getGender().equals("Male") || animal.getGender().equals("Female")));
     }
 
+// Взять всех животных. Узнать что ни одно из них не имеет страну происхождения Oceania.
     public static void task7() {
+        System.out.println("Задачка 7");
+
         List<Animal> animals = Util.getAnimals();
-//        animals.stream() Продолжить ...
+
+        animals.stream()
+                .filter(animal -> !animal.getOrigin().equals("Oceania"))
+                .map(animal -> "Животных из такой страны нет")
+                .distinct()
+                .forEach(System.out::println);
+
     }
+
+//    Взять всех животных. Отсортировать их породу в стандартном порядке и взять первые 100.
+//    Вывести в консоль возраст самого старого животного
 
     public static void task8() {
         List<Animal> animals = Util.getAnimals();
-//        animals.stream() Продолжить ...
+
+        System.out.println("Задачка 8");
+
+        animals.stream()//.sorted(Comparator.comparingInt(Animal::getAge))
+                .sorted(Comparator.comparing(Animal::getBread))
+                .limit(100)
+                .sorted(Comparator.comparingInt(Animal::getAge).reversed())
+                .limit(1)
+                .forEach(System.out::println);
     }
 
     public static void task9() {
