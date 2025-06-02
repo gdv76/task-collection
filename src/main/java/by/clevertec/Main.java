@@ -5,6 +5,7 @@ import by.clevertec.util.Util;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static by.clevertec.model.AnimalZoo.*;
@@ -141,7 +142,7 @@ public class Main {
 
         System.out.println("Задачка 8");
 
-        animals.stream()//.sorted(Comparator.comparingInt(Animal::getAge))
+        animals.stream()
                 .sorted(Comparator.comparing(Animal::getBread))
                 .limit(100)
                 .sorted(Comparator.comparingInt(Animal::getAge).reversed())
@@ -149,19 +150,48 @@ public class Main {
                 .forEach(System.out::println);
     }
 
+//    Взять всех животных. Преобразовать их в породы, а породы в []char
+//    Вывести в консоль длину самого короткого массива
+
     public static void task9() {
         List<Animal> animals = Util.getAnimals();
-//        animals.stream() Продолжить ...
+
+        System.out.println("Задачка 9");
+
+        animals.stream()
+                .map(animal -> animal.getBread().toCharArray().length)
+                .sorted()
+                .limit(1)
+                .forEach(System.out::println);
     }
+
+//    Взять всех животных. Подсчитать суммарный возраст всех животных. Вывести результат в консоль
 
     public static void task10() {
         List<Animal> animals = Util.getAnimals();
-//        animals.stream() Продолжить ...
+
+        System.out.println("Задачка 10");
+
+        animals.stream()
+                .map(Animal::getAge)
+                .reduce(Integer::sum)
+                .ifPresent(System.out::println);
+
     }
 
+//    Взять всех животных. Подсчитать средний возраст всех животных из индонезии (Indonesian). Вывести результат в консоль
     public static void task11() {
         List<Animal> animals = Util.getAnimals();
-//        animals.stream() Продолжить ...
+
+        System.out.println("Задачка 11");
+
+        Optional op = Optional.of(
+                animals.stream()
+                .filter(animal -> animal.getOrigin().equals("Indonesian"))
+                .collect(Collectors.averagingInt(Animal::getAge))
+        );
+        op.ifPresent(System.out::println);
+
     }
 
     public static void task12() {
