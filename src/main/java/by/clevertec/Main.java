@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static by.clevertec.model.AnimalZoo.*;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -215,9 +213,20 @@ public class Main {
 
     }
 
+//    Надвигается цунами и в районе эвакуации требуется в первую очередь обойти дома и эвакуировать больных и раненых (из Hospital),
+//    во вторую очередь детей и стариков (до 18 и пенсионного возраста) а после всех остальных. В первый этап эвакуации мест
+//    в эвакуационном транспорте только 500. Вывести всех людей попадающих в первый этап эвакуации в порядке приоритета (в консоль).
+
     public static void task13() {
+        System.out.println("Задачка 13");
+
         List<House> houses = Util.getHouses();
-//        houses.stream() Продолжить ...
+        houses.stream()
+                .map(HouseExt::new)
+                .flatMap(houseExt -> houseExt.getPersonExtList().stream())
+                .sorted()
+                .limit(500)
+                .forEach(System.out::println);
     }
 
     public static void task14() {
