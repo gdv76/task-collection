@@ -224,14 +224,31 @@ public class Main {
         houses.stream()
                 .map(HouseExt::new)
                 .flatMap(houseExt -> houseExt.getPersonExtList().stream())
+
                 .sorted()
                 .limit(500)
                 .forEach(System.out::println);
     }
 
+
     public static void task14() {
+        System.out.println("Задачка 14");
+
         List<Car> cars = Util.getCars();
-//        cars.stream() Продолжить ...
+           cars.stream()
+                   .map(CarExt::new)
+                   .filter(carExt -> carExt.getCountry() != null)
+                   .collect(Collectors.groupingBy(CarExt::getCountry,Collectors.summingDouble(carExt->carExt.getCar().getMass()*7.14/1000)))
+                   .forEach((c,cost)-> System.out.println("Страна: "+ c + " доход = " + cost));
+
+//        cars.stream()
+//                .map(CarExt::new)
+//                .filter(carExt -> carExt.getCountry() != null)
+//                .map(carExt -> carExt.getCar().getMass()*7.14/1000)
+//                .reduce(Double::sum)
+//                .stream()
+//                .forEach(System.out::println);
+
     }
 
     public static void task15() {
