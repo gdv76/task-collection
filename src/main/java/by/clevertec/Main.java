@@ -14,20 +14,20 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Задачки...");
-        task1();
-        task2();
-        task3();
-        task4();
-        task5();
-        task6();
-        task7();
-        task8();
-        task9();
-        task10();
-        task11();
-        task12();
-        task13();
-        task14();
+//        task1();
+//        task2();
+//        task3();
+//        task4();
+//        task5();
+//        task6();
+//        task7();
+//        task8();
+//        task9();
+//        task10();
+//        task11();
+//        task12();
+//        task13();
+//        task14();
         task15();
         task16();
         task17();
@@ -251,9 +251,24 @@ public class Main {
 
     }
 
+
     public static void task15() {
+        System.out.println("Задачка 15");
+
         List<Flower> flowers = Util.getFlowers();
-//        flowers.stream() Продолжить ...
+        flowers.stream()
+                .sorted(Comparator.comparing(Flower::getOrigin,Comparator.reverseOrder())
+                        .thenComparingInt(Flower::getPrice)
+                        .thenComparingDouble(Flower::getWaterConsumptionPerDay).reversed())
+                .filter(flower -> flower.getCommonName().substring(0, 1).matches("[C-S]+"))
+                .filter(Flower::isShadePreferred)
+                .filter(flower -> flower.getFlowerVaseMaterial().contains("Steel") ||
+                        flower.getFlowerVaseMaterial().contains("Aluminum") ||
+                        flower.getFlowerVaseMaterial().contains("Glass"))
+                .map(flower->flower.getPrice() + flower.getWaterConsumptionPerDay()*360*5*1.39/1000)
+                .reduce(Double::sum)
+                .ifPresent(d-> System.out.println("Обойдется бюджету в " + d + "$"));
+
     }
 
     public static void task16() {
