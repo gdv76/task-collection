@@ -311,8 +311,11 @@ public class Main {
                 .forEach(f -> System.out.println("Факультет = " + f.getKey() + " Средний возраст студентов = " + f.getValue()));
     }
 
+//    Вывод списка студентов заданной группы, у которых сдан 3 экзамен (>4).
     public static void task19() {
         List<Student> students = Util.getStudents();
+        List<Examination> examinations = Util.getExaminations();
+
 //        students.stream() Продолжить ...
     }
 
@@ -321,13 +324,26 @@ public class Main {
 //        students.stream() Продолжить ...
     }
 
+//    Определение количества студентов в каждой группе.
     public static void task21() {
+        System.out.println("Задачка 21");
+
         List<Student> students = Util.getStudents();
-//        students.stream() Продолжить ...
+        students.stream()
+                .collect(Collectors.groupingBy(Student::getFaculty, Collectors.counting()))
+                .forEach((faculty,count)->System.out.println("Факультет = " + faculty + " Количество студентов = " + count));
+
     }
 
+//Определение минимального возраста для каждого факультета
     public static void task22() {
+        System.out.println("Задачка 22");
+
         List<Student> students = Util.getStudents();
-//        students.stream() Продолжить ...
+
+        students.stream()
+                .collect(Collectors.groupingBy(Student::getFaculty, Collectors.minBy(Comparator.comparing(Student::getAge))))
+                .forEach((faculty,student)->System.out.println("Факультет = " + faculty + " Минимальный возраст студентов = " + student.get().getAge()));
+
     }
 }
