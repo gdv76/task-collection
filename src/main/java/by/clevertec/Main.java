@@ -7,7 +7,9 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -282,15 +284,31 @@ public class Main {
                 .forEach(System.out::println);
     }
 
+//    Вывод списка групп (без повторений).
     public static void task17() {
+        System.out.println("Задачка 17");
+
         List<Student> students = Util.getStudents();
-//        students.stream() Продолжить ...
+        students.stream()
+                .map(Student::getGroup)
+                .distinct()
+                .forEach(System.out::println);
     }
 
+//    Определение среднего возраста студентов для каждого факультета.
+//    Выводить название факультета и средний возраст в порядке убывания возраста.
+
     public static void task18() {
+        System.out.println("Задачка 18(-)");
+
         List<Student> students = Util.getStudents();
         List<Examination> examinations = Util.getExaminations();
-//        students.stream() Продолжить ...
+
+        students.stream()
+                .collect(Collectors.groupingBy(Student::getFaculty, Collectors.averagingDouble(Student::getAge)))
+                .entrySet().stream()
+                .sorted((f1, f2) -> f2.getValue().compareTo(f1.getValue()))
+                .forEach(f -> System.out.println("Факультет = " + f.getKey() + " Средний возраст студентов = " + f.getValue()));
     }
 
     public static void task19() {
