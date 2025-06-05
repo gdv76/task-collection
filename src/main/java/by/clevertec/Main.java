@@ -271,9 +271,15 @@ public class Main {
 
     }
 
+//    Вывод списка студентов младше 18 лет в алфавитном порядке с указанием возраста
     public static void task16() {
+        System.out.println("Задачка 16");
+
         List<Student> students = Util.getStudents();
-//        students.stream() Продолжить ...
+        students.stream()
+                .filter(student -> student.getAge() < 18)
+                .sorted(Comparator.comparing(Student::getSurname))
+                .forEach(System.out::println);
     }
 
     public static void task17() {
