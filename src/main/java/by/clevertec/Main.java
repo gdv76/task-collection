@@ -313,12 +313,18 @@ public class Main {
 
 //    Вывод списка студентов заданной группы, у которых сдан 3 экзамен (>4).
     public static void task19() {
+        System.out.println("Задачка 19");
+
         List<Student> students = Util.getStudents();
         List<Examination> examinations = Util.getExaminations();
-
-//        students.stream() Продолжить ...
+        examinations.stream()
+                .filter(examination -> examination.getExam3() > 4)
+                .map(examination -> students.get(examination.getStudentId()))
+                .filter(student -> student.getGroup().equals("C-2"))
+                .forEach(System.out::println);
     }
 
+//    Определение факультета с максимальной средней оценкой по первому экзамену.
     public static void task20() {
         List<Student> students = Util.getStudents();
 //        students.stream() Продолжить ...
